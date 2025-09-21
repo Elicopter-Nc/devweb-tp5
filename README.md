@@ -86,13 +86,29 @@ async function requestListener(_request, response) {
 ```
 
 
+### Question 1.6 indiquer ce que cette commande a modifié dans votre projet.
+
+```
+npm install cross-env --save
+npm install nodemon --save-dev
+```
 
 
+* Elles ont ajouté les dépendances cross-env (en production) et nodemon (en développement) dans le fichier package.json
+
+  * cross-env apparaît dans la section "dependencies".
+  * nodemon apparaît dans la section "devDependencies".  
+
+* Elles ont créé le fichier package-lock.json pour enregistrer précisément les versions installées et leurs dépendances.  
+
+* Elles ont téléchargé les paquets nécessaires dans le dossier node_modules.
 
 
+### Question 1.7 quelles sont les différences entre les scripts http-dev et http-prod ?
 
+* http-dev utilise nodemon, qui surveille les fichiers du projet et redémarre automatiquement le serveur à chaque modification. 
 
-
+* http-prod utilise simplement node pour lancer le serveur, sans surveillance des fichiers : le serveur ne redémarre pas automatiquement si on modifie le code.
 
 
 
