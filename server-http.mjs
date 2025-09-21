@@ -7,11 +7,14 @@ const port = 8000;
 function requestListener(_request, response) {
   fs.readFile("index.html", "utf8")
     .then((contents) => {
-      response.setHeader("Content-Type", "text/html");
-      response.writeHead(200);
-      return response.end(contents);
+      response.writeHead(200, { "Content-Type": "text/html" });
+      response.end(contents);
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      console.error(error);
+      response.writeHead(500);
+      response.end( "Error 500: Internal Server Error" );
+    });
 }
 
 const server = http.createServer(requestListener);
