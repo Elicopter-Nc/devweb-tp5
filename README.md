@@ -122,14 +122,23 @@ npm install nodemon --save-dev
 
 
 
+## Partie 2 : framework Express
+
+
+### Question 2.1 donner les URL des documentations de chacun des modules installés par la commande précédente.
+
+```
+npm install --save express http-errors loglevel morgan
+```
+
+* express : https://expressjs.com/fr/
+* http-errors : https://www.npmjs.com/package/http-errors
+* loglevel : https://www.npmjs.com/package/loglevel
+* morgan : https://www.npmjs.com/package/morgan
 
 
 
-
-
-
-
-
+### Question 2.2 vérifier que les trois routes fonctionnent.
 
 
 
