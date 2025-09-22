@@ -112,6 +112,28 @@ npm install nodemon --save-dev
 
 
 
+### Question 1.8 donner les codes HTTP reçus par votre navigateur pour chacune des quatre pages précédentes.
+
+
+* http://localhost:8000/index.html : $${\color{green}200}$$
+* http://localhost:8000/random.html : $${\color{green}200}$$
+* http://localhost:8000/ :  $${\color{red}404}$$
+* http://localhost:8000/dont-exist : $${\color{red}404}$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
