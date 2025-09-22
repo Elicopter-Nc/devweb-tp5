@@ -49,8 +49,8 @@ function requestListener(_request, response) {
     .catch((error) => console.error(error));
 }
 ```
-
-Le client ne reçoit aucune réponse car le fichier "index.html" n'existe pas.
+>[!WARNING]  
+>Le client ne reçoit aucune réponse car le fichier "index.html" n'existe pas.
 
 
 ### Question 1.4 quelle est l’erreur affichée dans la console ?
@@ -120,7 +120,7 @@ npm install nodemon --save-dev
 * http://localhost:8000/ :  $${\color{red}404}$$
 * http://localhost:8000/dont-exist : $${\color{red}404}$$
 
-
+*****
 
 ## Partie 2 : framework Express
 
