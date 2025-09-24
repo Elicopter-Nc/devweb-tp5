@@ -6,15 +6,16 @@
 
 
 En-têtes de la réponse HTTP du serveur :   
-
- * Connection :  keep-alive  
- * Date :  Sun,21 Sep 2025 04:02:54 GMT  
- * Keep-alive :  timeout = 5  
- * Transfer-encoding :  chunked
+```
+  Connection : keep-alive  
+  Date : Sun,21 Sep 2025 04:02:54 GMT  
+  Keep-alive : timeout = 5  
+  Transfer-encoding : chunked
+```
 
 ### Question 1.2 donner la liste des en-têtes qui ont changé depuis la version précédente.
 
-Après avoir remplacer la fonction requestListener() par la suivante :
+Après avoir remplacer la fonction ```requestListener()``` par la suivante :
 
 ```js
 function requestListener(_request, response) {
@@ -25,16 +26,17 @@ function requestListener(_request, response) {
 
 On obtient l'en-têtes de la reponse HTTP du serveur suivante :
 
- * Connection :  keep-alive
- * Content-Length :  20
- * Content-Type :  application/json
- * Date :  Sun,21 Sep 2025 04:10:17 GMT  
- * Keep-alive :  timeout = 5  
- 
+```
+  Connection : keep-alive
+  Content-Length : 20
+  Content-Type : application/json
+  Date : Sun,21 Sep 2025 04:10:17 GMT  
+  Keep-alive : timeout = 5  
+ ```
 
 ### Question 1.3 que contient la réponse reçue par le client ?
 
-On remplace la fonction requestListener() par la suivante : 
+On remplace la fonction ```requestListener()``` par la suivante : 
 
 ```js
 import fs from "node:fs/promises";
@@ -50,7 +52,7 @@ function requestListener(_request, response) {
 }
 ```
 >[!WARNING]  
->Le client ne reçoit aucune réponse car le fichier "index.html" n'existe pas.
+>Le client ne reçoit aucune réponse car le fichier ```index.html``` n'existe pas.
 
 
 ### Question 1.4 quelle est l’erreur affichée dans la console ?
@@ -140,14 +142,87 @@ npm install --save express http-errors loglevel morgan
 
 ### Question 2.2 vérifier que les trois routes fonctionnent.
 
+les routes suivantes fonctionnent :
+
+  * http://localhost:8000
+  * http://localhost:8000/index.html
+  * http://localhost:8000/random/5
 
 
 
+### Question 2.3 lister les en-têtes des réponses fournies par Express. Lesquelles sont nouvelles par rapport au serveur HTTP ?
+
+ En-têtes des réponses fournies par Express:
+
+ 
+http://localhost:8000 :  
+```
+HTTP/1.1 304 Not Modified
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Sun, 21 Sep 2025 11:29:08 GMT
+ETag: W/"0-1996c08edff"
+Date: Wed, 24 Sep 2025 04:22:26 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
 
 
+http://localhost:8000/index.html :  
+
+```
+HTTP/1.1 304 Not Modified
+X-Powered-By: Express
+Accept-Ranges: bytes
+Cache-Control: public, max-age=0
+Last-Modified: Sun, 21 Sep 2025 11:29:08 GMT
+ETag: W/"0-1996c08edff"
+Date: Wed, 24 Sep 2025 04:22:39 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
 
 
+http://localhost:8000/random/5 :  
+
+```
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 81
+ETag: W/"51-FZ+ObVDXah6Dtwd1tJvF96d5m48"
+Date: Wed, 24 Sep 2025 04:22:58 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
+
+En-têtes de réponse ajouté par Express : 
+
+* ```X-Powered-By: Express``` → signature du framework.
+* ```ETag``` → pour la validation de cache.
+* ```Cache-Control: public, max-age=0 ``` → directives de cache.
+* ```Last-Modified ``` → date de modification de la ressource.
+* ```Accept-Ranges: bytes``` → permet la gestion de requêtes partielles (utile pour fichiers statiques).
 
 
+### Question 2.4 quand l’événement listening est-il déclenché ?
+
+On remplace la dernière ligne de ```server-express.mjs``` par les suivantes :
+
+
+```js
+const server = app.listen(port, host);
+
+server.on("listening", () =>
+  console.info(
+    `HTTP listening on http://${server.address().address}:${server.address().port} with mode '${process.env.NODE_ENV}'`,
+  ),
+);
+
+console.info(`File ${import.meta.url} executed.`);
+```
+
+L’événement listening est déclenché quand le serveur a fini de s’initialiser et commence à écouter les connexions entrantes.
 
 
