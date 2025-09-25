@@ -269,9 +269,9 @@ Donc les codes sont :
 
 
 
+### Question 2.7 vérifier que l’affichage change bien entre le mode production et le mode development.
 
-
-
+Oui l'affichage change bien entre le mode production et le mode development.
 
 
 
