@@ -226,3 +226,56 @@ console.info(`File ${import.meta.url} executed.`);
 L’événement listening est déclenché quand le serveur a fini de s’initialiser et commence à écouter les connexions entrantes.
 
 
+### Question 2.5 indiquer quelle est l’option (activée par défaut) qui redirige ```/``` vers ```/index.html``` ?
+
+On effectue les étapes suivantes :
+
+* créer un sous-dossier static
+* déplacer le fichier index.html dans le sous-dossier static
+* extraire l’élément <style> de index.html dans un nouveau fichier style.css que vous lierez à index.html avec <link rel="stylesheet" href="style.css">
+* remplacer la route de la page d’accueil par app.use(express.static("static"));
+
+
+L’option concernée est ```index```, qui par défaut vaut ```index.html```.   
+C’est elle qui permet à ```express.static``` de servir automatiquement le fichier ```index.html lorsqu’on accède simplement à la racine /.```   
+Ainsi, sans avoir besoin de définir de route spécifique, une requête vers ```/``` est redirigée implicitement vers ```/index.html``` grâce à cette option activée par défaut.
+
+
+
+
+### Question 2.6 visiter la page d’accueil puis rafraichir (Ctrl+R) et ensuite forcer le rafraichissement (Ctrl+Shift+R). Quels sont les codes HTTP sur le fichier ```style.css``` ?
+
+
+* Quand on visites la page d’accueil :
+
+  * La première fois que le navigateur charge ```style.css```, le serveur renvoie ```HTTP 200 (OK)```, car   le fichier est demandé et transféré normalement.
+
+* Ensuite :
+
+  * Rafraîchissement normal (Ctrl+R) :
+  Le navigateur utilise le cache. Il envoie une requête conditionnelle avec l’entête ```If-Modified-Since``` ou ```If-None-Match```.  
+  Comme le fichier n’a pas changé, le serveur répond avec ```HTTP 304 (Not Modified)``` → le fichier   n’est pas renvoyé, seul l’en-tête de réponse l’est.
+
+  * Rafraîchissement forcé (Ctrl+Shift+R) :
+  Le cache est ignoré, le navigateur redemande entièrement la ressource. Le serveur renvoie alors à nouveau ```HTTP 200 (OK)``` avec le contenu complet du fichier ```style.css```.
+
+
+Donc les codes sont :
+
+  * 200 lors du premier chargement  
+  * 304 au rafraîchissement normal(Ctrl+R)
+  * 200 au rafraîchissement forcé(Ctrl+Shift+R)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
