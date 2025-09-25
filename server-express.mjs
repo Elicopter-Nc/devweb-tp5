@@ -5,10 +5,9 @@ const host = "localhost";
 const port = 8000;
 
 const app = express();
+if (app.get("env") === "development") app.use(morgan("dev"));
 
-app.get(["/", "/index.html"], async function (request, response, next) {
-  response.sendFile("index.html", { root: "./" });
-});
+app.use(express.static("static"));
 
 app.get("/random/:nb", async function (request, response, next) {
   const length = request.params.nb;
